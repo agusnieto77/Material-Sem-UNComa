@@ -131,4 +131,3 @@ barplot(tabla)
 
 # ¿Cómo elaborar un resumen estadístico de un set de datos?
 summary(DataFrame)
-
