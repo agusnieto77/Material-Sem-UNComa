@@ -48,12 +48,17 @@ fechas <- html |> html_elements(xpath='//*[contains(@class, "com-date")]') |> ht
 
 # Imprimir 
 fechas
+class(fechas)
 
 # Transformamos el vector fechas en un vector de clase data-time
 fechas <- as_date(fechas, format = '%d de %B de %Y')
-
+class(fechas)
+fechas <- as.character(fechas)
+fechas <- as_date(fechas)
 # Imprimir 
 fechas
+
+fechas[1]+100
 
 # Seleccionar los nodos de los titulares
 titulares <- html |> html_elements(xpath='//*[contains(@class, "mod-description")]/h2') |> html_text2()

@@ -17,8 +17,8 @@ cp <- read_html(url) |>
 # Parte III - Selenium ----------------------------------------------------
 
 url <- 'https://www.clarin.com/politica/'
-servidor <-rsDriver(browser = "firefox", port = 3442L) 
-cliente <- servidor$client              
+servidor <- rsDriver(browser = "firefox", port = 1234L)
+cliente <- servidor$client             
 cliente$navigate(url) 
 
 scroll <- cliente$findElement("css", "body")
@@ -36,3 +36,5 @@ cp <- cliente$getPageSource()[[1]] |>
   url_absolute(url)
 
 cp
+
+# https://stackoverflow.com/questions/45395849/cant-execute-rsdriver-connection-refused

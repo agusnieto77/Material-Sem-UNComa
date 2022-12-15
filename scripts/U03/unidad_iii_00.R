@@ -10,8 +10,12 @@ url
 titulos <- c()
 
 for (i in url) {
+  print(paste0('Estoy escrapeando la url -> ', i))
   titulos <- append(titulos, read_html(i) |> html_elements('h2.news__title') |> html_text2())
 }
+
+# install.packages("devtools")
+devtools::install_github("agusnieto77/ACEP")
 
 require(ACEP)
 
@@ -19,12 +23,12 @@ titulos_limpios <- acep_clean(titulos)
 
 texto <- acep_token(titulos_limpios)
 
-acep_token_table(texto$token)
+acep_token_table(texto$token, u=20)
 
-acep_token_plot(texto$token, u=20)
+acep_token_plot(texto$token, u=20, frec = F)
 
 
-#  Con API ----------------------------------------------------------------
+# Con API ----------------------------------------------------------------
 
 require(rtweet)
 

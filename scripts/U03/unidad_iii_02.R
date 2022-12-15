@@ -38,6 +38,13 @@ for(url in urls[1:3]){
                     html_attr('href'))
 }
 
+for(url in urls[1:3]){
+  links <- append(links, read_html(url) |> 
+                    html_elements('.mvp-blog-story-wrap a, .mvp-widget-feat2-left a,
+                                  .mvp-widget-feat2-right a') |> 
+                    html_attr('href'))
+}
+
 # Imprimir 
 links
 
