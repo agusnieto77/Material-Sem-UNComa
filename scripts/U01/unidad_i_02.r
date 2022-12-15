@@ -4,7 +4,8 @@
 
 ### Ordenar y reordenar datos con dplyr y tidyr
 
-# **dplyr** es una gramática de manipulación de datos que proporciona un conjunto consistente de verbos que lo ayudan a resolver los desafíos más comunes de manipulación de datos:
+# **dplyr** es una gramática de manipulación de datos que proporciona un conjunto consistente 
+# de verbos que lo ayudan a resolver los desafíos más comunes de manipulación de datos:
 
 #      -> mutate() agrega nuevas variables que son funciones de variables existentes
 

@@ -12,6 +12,7 @@ Objeto_02 <- "Hola Mundo 2" # esta es la forma recomendada (un espacio en blanco
 Objeto_03  <-  "Hola Mundo 3"
 Objeto_04   =   "Hola Mundo 4"
 Objeto_05    <-   
+  "Hola Mundo 5"
 
 print(Objeto_01)
 print(Objeto_02)
