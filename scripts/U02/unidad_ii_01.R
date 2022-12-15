@@ -73,7 +73,7 @@ glimpse(titulos_la_capital)
 # con la frecuencia de menciones de un diccionario
 titulos_la_capital$piquetes <- acep_men(   # F1 para ver de qué se trata
   x       = titulos_la_capital$titulo,     # Vector de texto
-  y       = c('piquete', 'corte de ruta'), # Vector de palabras
+  y       = c('piquete', 'corte de ruta', 'huelga', 'paro'), # Vector de palabras
   tolower = TRUE)                          # Pasar todo a minúsculas
 
 # Limpiamos la consola
@@ -285,6 +285,62 @@ barplot(frecuencia ~ año,
 cat("\014")
 #
 
+# Títulos, Bajadas y Notas ------------------------------------------------
+
+# Vamos a crear una sub-base con las variables 'fecha', 'bajada' y 'nota'
+t_b_n_la_capital <- la_capital[ , c('fecha', 'titulo', 'bajada', 'nota')]
+
+# Creamos una nueva variables pegando titulo, bajada y nota en una misma celda
+t_b_n_la_capital$t_b_n <- paste(t_b_n_la_capital$titulo, 
+                                t_b_n_la_capital$bajada, 
+                                t_b_n_la_capital$nota,
+                                sep = ' || ')
+
+# Nos quedamos solo con las variables 'fecha' y 't_b'
+t_b_n_la_capital <- t_b_n_la_capital[ , c('fecha', 't_b_n')]
+
+# Con esta sub-base vamos a generar una nueva columna 
+# con la frecuencia de menciones de un diccionario
+t_b_n_la_capital$piquetes <- acep_men(x = t_b_n_la_capital$t_b_n, 
+                                      y = c('covid', 'pandemia'),
+                                      tolower = TRUE)
+
+# Limpiamos la consola
+cat("\014")
+
+# Inspeccionamos la base
+glimpse(t_b_n_la_capital)
+
+# Vemos cuantos piquetes se contabilizaron
+sum(t_b_n_la_capital$piquetes, na.rm = TRUE)
+
+# Filtramos los título que contabilizaron al menos una mención
+piquetes_t_b_n <- subset(t_b_n_la_capital, piquetes > 0)
+
+# Imprimimos las 131 filas
+print(piquetes_t_b_n, n = nrow(piquetes_t_b_n))
+
+# Limpiamos la consola
+cat("\014")
+
+# Agrupamos por año y contamos piquetes
+tabla_piquetes_anio_t_b_n <- piquetes_t_b_n |>
+  mutate(año = year(fecha)) |> 
+  count(año, name = 'frecuencia')
+
+# Imprimimos
+tabla_piquetes_anio_t_b_n
+
+# Visualizamos
+barplot(frecuencia ~ año, 
+        data = tabla_piquetes_anio_t_b_n,
+        main="Piquetes [dicc ad hoc - titulos + bajadas + notas]",
+        col=rgb(0.8,0.1,0.1,0.6))
+
+# Limpiamos la consola
+cat("\014")
+#
+
 # Diccionario de SISMOS ---------------------------------------------------
 
 # Vamos a crear una nueva sub-base con las variables 'fecha', 'bajada' y 'nota'
@@ -420,7 +476,7 @@ cat("\014")
 glimpse(la_capital_gp)
 
 # Vemos cuantos piquetes se contabilizaron
-sum(la_capital_gp$conflictos)
+sum(la_capital_gp$conflictos, na.rm = T)
 
 # Filtramos los título que contabilizaron al menos una mención
 la_capital_gp <- subset(la_capital_gp, conflictos > 1)
