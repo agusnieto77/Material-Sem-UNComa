@@ -80,3 +80,12 @@ ggplot(
   labs(x=NULL,y=NULL) +
   theme_bw() +
   theme(legend.title = element_blank())
+
+ggplot(
+  radi_mdp 
+  |> filter(!fraccion %in% c('77','83','82','81','80','79','78','76','75','74','73'))
+) +
+  geom_sf(aes(fill = gid)) +
+  labs(x=NULL,y=NULL) +
+  theme_bw() +
+  theme(legend.title = element_blank())
