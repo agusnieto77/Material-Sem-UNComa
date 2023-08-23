@@ -164,7 +164,7 @@ head(tablafemicidios, 5) %>%
 
 # Descarga datos población mundial
 
-url <- "https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_wide.csv"
+url <- "https://raw.githubusercontent.com/carpentries-incubator/open-science-with-r/gh-pages/data/gapminder_wide.csv"
 
 file <- file.path(".", basename(url))
 
@@ -250,7 +250,7 @@ tabla02 <- datatable(gapminder)
 html <- "tabla02.html"
 saveWidget(tabla02, html)
 
-# EPH: Encuesta Permanante de Hogares
+# EPH: Encuesta Permanente de Hogares
 
 # El paquete 'eph' en un conjunto de herramientas para descargar y manipular la Encuesta Permanente de Hogares de Argentina. Podemos descargar los conjuntos de datos, descargar los datos sobre pobreza, podemos calcular si un hogar es pobre o no, siguiendo la metodología oficial. Los métodos implementados se basan en INDEC (2016).
 
@@ -356,3 +356,4 @@ print("Tabla Unificada")
     Tabla_Ocu2, 
     Tabla_Ocu1, 
     by = "Condicion"))
+
