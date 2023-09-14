@@ -5,6 +5,7 @@
 
 # Paquetes a instalar
 # install.packages('DT')
+# install.packages("devtools")
 # devtools::install_github("agusnieto77/ACEP")
 
 # Paquetes a cargar
