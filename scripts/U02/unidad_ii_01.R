@@ -5,7 +5,8 @@
 
 # Paquetes a instalar
 # install.packages('DT')
-# install.packages('ACEP')
+# install.packages("devtools")
+# devtools::install_github("agusnieto77/ACEP")
 
 # Paquetes a cargar
 require(DT)
@@ -26,7 +27,7 @@ cat("\014")
 # Aumentamos el valor de 'timeout' que por defecto es de 60 segundos
 # 600 es un poco exagerado
 # Mi abuela siempre decía: 'Mejor que sobre...'
-options(timeout = 600) 
+options(timeout = 600)
 
 # Creamos el objeto 'la_capital'
 la_capital <- acep_load_base(acep_bases$lc_mdp) # F1 en acep_load_base() para ver de qué se trata
@@ -73,7 +74,7 @@ glimpse(titulos_la_capital)
 # con la frecuencia de menciones de un diccionario
 titulos_la_capital$piquetes <- acep_men(   # F1 para ver de qué se trata
   x       = titulos_la_capital$titulo,     # Vector de texto
-  y       = c('piquete', 'corte de ruta', 'huelga', 'paro'), # Vector de palabras
+  y       = c('piquete', 'corte de ruta'), # Vector de palabras
   tolower = TRUE)                          # Pasar todo a minúsculas
 
 # Limpiamos la consola
@@ -346,22 +347,24 @@ cat("\014")
 # Vamos a crear una nueva sub-base con las variables 'fecha', 'bajada' y 'nota'
 la_capital_sismos <- la_capital[ , c('fecha','titulo','bajada','nota')]
 
+dicc_sismos <- acep_load_base(acep_diccionarios$dicc_confl_sismos)
+
 # Con esta sub-base vamos a generar una nueva columna con la 
 # frecuencia de menciones del diccionario de SISMOS en el título
 la_capital_sismos$conf_tit <- acep_men(x = la_capital$titulo, 
-                                        y = acep_diccionarios$dicc_confl_sismos,
+                                        y = dicc_sismos,
                                         tolower = TRUE)
 
 # Con esta sub-base vamos a generar una nueva columna con la 
 # frecuencia de menciones del diccionario de SISMOS en la bajada
 la_capital_sismos$conf_baj <- acep_men(x = la_capital$bajada, 
-                                       y = acep_diccionarios$dicc_confl_sismos,
+                                       y = dicc_sismos,
                                        tolower = TRUE)
 
 # Con esta sub-base vamos a generar una nueva columna con la 
 # frecuencia de menciones del diccionario de SISMOS en la nota
 la_capital_sismos$conf_not <- acep_men(x = la_capital$nota, 
-                                       y = acep_diccionarios$dicc_confl_sismos,
+                                       y = dicc_sismos,
                                        tolower = TRUE)
 
 # Reemplazamos los valores perdidos en las columnas numéricas por el valor 0
